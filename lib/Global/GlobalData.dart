@@ -4,7 +4,11 @@ class NewsData {
   String author, title, description, url, urlToImage, publishedAt, content;
 }
 
+List<Color> primaryColors = [Color(0xFFFC6D1C), Color(0xFFF0D0620)];
+List<Color> secondaryColors = [Color(0xFFF52862),Color(0xFF41087C)];
+
 Color startColor = Color(0xFFFC6D1C);
+
 Color endColor = Color(0xFFF52862);
 
 myTextField(controller, hintText, {obscure, errorText}) {

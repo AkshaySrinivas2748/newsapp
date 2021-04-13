@@ -33,13 +33,24 @@ class _RegisterState extends State<Register> {
     print('Registering');
     try {
       UserCredential userCredential = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password);
+          .createUserWithEmailAndPassword(
+              email: "$email", password: "$password");
+      showSnackBar(context, 'Successfully Registered',color: Colors.green.withOpacity(0.7));
       Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
     } on FirebaseAuthException catch (e) {
+      print(e.code);
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+        setState(() {
+          emailErrorText = 'The account already exists for this email.';
+        });
+        // print('The account already exists for that email.');
+      } else if (e.code == 'invalid-email') {
+        setState(() {
+          emailErrorText = 'Invalid E-mail, enter valid E-mail.';
+        });
+        // print('The account already exists for that email.');
       }
     } catch (e) {
       print(e);
@@ -73,7 +84,11 @@ class _RegisterState extends State<Register> {
     var bright = MediaQuery.of(context).platformBrightness;
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor:
-            bright == Brightness.light ? Colors.black : Colors.white));
+        bright == Brightness.light ? Colors.black : Colors.white));
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
 
     return SafeArea(
       child: NetworkSensitive(
@@ -180,7 +195,7 @@ class _RegisterState extends State<Register> {
                           });
                         },
                         decoration: myInputDecoration(
-                            'Password', confirmPasswordErrorText),
+                            'Retype Password', confirmPasswordErrorText),
                       ),
                     ),
                     Container(
