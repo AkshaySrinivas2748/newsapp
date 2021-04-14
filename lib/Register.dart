@@ -35,7 +35,9 @@ class _RegisterState extends State<Register> {
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
               email: "$email", password: "$password");
-      showSnackBar(context, 'Successfully Registered',color: Colors.green.withOpacity(0.7));
+      showSnackBar(context, 'Successfully Registered',
+          color: Colors.green.withOpacity(0.7));
+      print(userCredential);
       Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
     } on FirebaseAuthException catch (e) {
       print(e.code);
@@ -67,7 +69,7 @@ class _RegisterState extends State<Register> {
         .hasMatch(email.text)) {
       emailErrorText = 'Enter Proper E mail';
     } else if (password.text.trim().length < 8) {
-      passwordErrorText = 'Password should have atr least 8 characters';
+      passwordErrorText = 'Password should have at least 8 characters';
     } else if (password.text != confirmPassword.text) {
       confirmPasswordErrorText = 'Passwords mismatch';
     } else if (location.text.trim() == '') {
@@ -84,7 +86,7 @@ class _RegisterState extends State<Register> {
     var bright = MediaQuery.of(context).platformBrightness;
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor:
-        bright == Brightness.light ? Colors.black : Colors.white));
+            bright == Brightness.light ? Colors.black : Colors.white));
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,

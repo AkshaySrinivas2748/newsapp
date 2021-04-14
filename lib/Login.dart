@@ -138,7 +138,7 @@ class _LoginState extends State<Login> {
                               r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                           .hasMatch(email.text)) {
                         setState(() {
-                          emailErrorText = 'Enter valid E=mail';
+                          emailErrorText = 'Enter valid E-mail';
                         });
                       } else if (password.text.trim() == '') {
                         setState(() {
