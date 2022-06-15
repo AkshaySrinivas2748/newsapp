@@ -8,7 +8,7 @@ import 'SplashScreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  print('simply');
   await Firebase.initializeApp();
   runApp(MyApp());
 }
